@@ -11,10 +11,6 @@ export default function Index() {
       }}
     >
       <Text className="font-rubik text-3xl mb-5">Welcome to Real-Estate</Text>
-      <Link href="/sign-in">SignIn</Link>
-      <Link href="/explore">Explore</Link>
-      <Link href="/profile">Profile</Link>
-      <Link href='/properties/[id]'>Properties</Link>
     </View>
   );
 }
