@@ -1,11 +1,74 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType, Alert } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import icons from '@/constants/icons'
+import { settings } from '@/constants/data'
+import { useGlobalContext } from '@/lib/global-provider'
+import { logout } from '@/lib/appwrite'
 
-const Profile = () => {
+interface SettingTabProps {
+  icon: ImageSourcePropType,
+  title: string,
+  onPress?: () => void,
+  textStyle?: string,
+  showArrow?: boolean
+}
+const SettingsTab = ({ icon, title, onPress, textStyle, showArrow = true }: SettingTabProps) => {
   return (
-    <View>
-      <Text>Profile</Text>
-    </View>
+    <TouchableOpacity onPress={onPress} className='py-3 flex flex-row justify-between items-center'>
+      <View className='flex flex-row items-center gap-3'>
+        <Image source={icon} className='size-6' />
+        <Text className={`font-rubik-medium text-lg text-black-300 ${textStyle}`}> {title}</Text>
+      </View>
+      {showArrow && <Image source={icons.rightArrow} className='size-5' />}
+    </TouchableOpacity>
+  )
+}
+const Profile = () => {
+  const { user, refetch } = useGlobalContext()
+
+  const handleLogout = async () => {
+    const result = await logout();
+    if (result) {
+      Alert.alert("Success", 'Logged out successfully');
+      refetch({});
+    }
+    else {
+      Alert.alert("Error", "Failed to logout");
+    }
+  }
+  return (
+    <SafeAreaView className='bg-white h-full'>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName='pb-32 px-7'>
+        <View className='flex flex-row items-center justify-between mt-5'>
+          <Text className='text-xl font-rubik-bold'>Profile</Text>
+          <Image source={icons.bell} className='size-5' />
+        </View>
+        <View className='flex mt-5 flex-row justify-center'>
+          <View className='flex flex-col relative items-center mt-5 '>
+            <Image source={{ uri: user?.avatar }} className='relative rounded-full size-44  ' />
+            <TouchableOpacity className='absolute bottom-11 right-2'>
+              <Image className='size-9' source={icons.edit} />
+            </TouchableOpacity>
+            <Text className='mt-2 font-rubik-bold text-2xl'>
+              {user?.name}
+            </Text>
+          </View>
+        </View>
+        <View className='mt-10 flex flex-col'>
+          <SettingsTab icon={icons.calendar} title='My Booking' />
+          <SettingsTab icon={icons.wallet} title='Payments' />
+        </View>
+        <View className=' flex flex-col mt-5 border-t pt-5 border-primary-200'>
+          {settings.slice(2).map((item, index) => (
+            <SettingsTab key={index} {...item} />
+          ))}
+        </View>
+        <View className=' flex flex-col mt-5 border-t pt-5 border-primary-200'>
+          <SettingsTab icon={icons.logout} title='Logout' textStyle='text-danger' onPress={handleLogout} showArrow={false} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
