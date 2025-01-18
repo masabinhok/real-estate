@@ -118,7 +118,7 @@ export async function getLatestProperties() {
 export async function getProperties({filter, query, limit}: {filter: string, query: string, limit?: number}) {
   try {
       const buildQuery = [Query.orderDesc('$createdAt')];
-      if(filter && filter !== 'all') {
+      if(filter && filter !== 'All') {
         buildQuery.push(Query.equal('type', filter));
       }
 
