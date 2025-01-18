@@ -25,6 +25,7 @@ client
 .setProject(config.projectId!)
 .setPlatform(config.platform!)
 
+
 // features to add from appwrite, avatar generates a image using clients first and last name, account is for user account management
 export const avatar = new Avatars(client);
 export const account = new Account(client);
