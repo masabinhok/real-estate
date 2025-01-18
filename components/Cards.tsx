@@ -37,10 +37,10 @@ export const Card = ({ onPress, item }: Props) => {
       onPress={onPress}
     >
       <View className='flex flex-row items-center absolute px-2 top-5 right-5 bg-white/90 p-1 rounded-full z-50'>
-        <Image source={{ uri: item.image }} className='size-2.5' />
+        <Image source={icons.star} className='size-2.5' />
         <Text className='text-xs font-rubik-bold text-primary-300 ml-0.5'>{item.rating}</Text>
       </View>
-      <Image source={images.newYork} className='w-full h-40 rounded-lg' />
+      <Image source={{ uri: item.image }} className='w-full h-40 rounded-lg' />
       <View className='flex flex-col mt-2'>
         <Text className='text-base font-rubik-bold text-black-300' >{item.name}</Text>
         <Text className='text-xs text-black-100 font-rubik' numberOfLines={1}>{item.address}</Text>
