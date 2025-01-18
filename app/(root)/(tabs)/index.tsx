@@ -79,15 +79,16 @@ export default function Index() {
             {
               latestPropertiesLoading ? (<View className="flex items-center w-full justify-center h-80">
                 <ActivityIndicator size="large" className="mt-5 text-primary-300" />
-              </View>) : !latestProperties || latestProperties.length === 0 ? <NoResults /> : (<FlatList
-                horizontal
-                data={latestProperties}
-                renderItem={({ item }) => <FeaturedCard item={item} onPress={() => handleCardPress(item.$id)} />}
-                keyExtractor={(item) => item.$id}
-                showsHorizontalScrollIndicator={false}
-                bounces={false}
-                contentContainerClassName="flex items-center w-full gap-5 mt-5"
-              />)
+              </View>) : !latestProperties || latestProperties.length === 0 ? <NoResults /> : (
+                <FlatList
+                  horizontal
+                  data={latestProperties}
+                  renderItem={({ item }) => <FeaturedCard item={item} onPress={() => handleCardPress(item.$id)} />}
+                  keyExtractor={(item) => item.$id}
+                  showsHorizontalScrollIndicator={false}
+                  bounces={false}
+                  contentContainerClassName="flex gap-5 mt-5"
+                />)
             }
           </View>
           <View className="flex flex-row items-center justify-between">
