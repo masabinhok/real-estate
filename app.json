@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sabinbuilds.restate"
     },
     "web": {
       "bundler": "metro",
@@ -49,6 +50,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "316bbd1b-944f-4aaf-ba54-54db62f67fae"
+      }
     }
   }
 }
